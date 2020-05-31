@@ -8,8 +8,8 @@
 <div class="flex flex-wrap">
   {% for contact in contacts %}
   <div class="w-33 pa3">
-    <h2>{{ contact.name }}</h2>
-    
+    <h2><a href="{% url 'show_contact' pk=contact.pk %}">{{ contact.name }}</a></h2>
+
     {% if contact.company_name %}
     <h3>{{ contact.company_name }}</h3>
     {% endif %}

@@ -22,3 +22,4 @@ class Contact(models.Model):
     company_name = models.CharField(max_length=255, null=True, blank=True)
     birthday = models.DateField(null=True, blank=True)
     
+class Notes(models.model):

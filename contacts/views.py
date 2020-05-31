@@ -9,6 +9,9 @@ def list_contacts(request):
     return render(request, "contacts/list_contacts.html",
                   {"contacts": contacts})
 
+def show_contact(request, pk):
+    contact = get_object_or_404(Contact, pk=pk)
+    return render(request, "contacts/show_contact.html", {"contact": contact})
 
 def add_contact(request):
     if request.method == 'GET':
@@ -46,3 +49,4 @@ def delete_contact(request, pk):
 
     return render(request, "contacts/delete_contact.html",
                   {"contact": contact})
+

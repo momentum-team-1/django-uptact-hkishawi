@@ -1,15 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>All Contacts</h1>
-
-<p><a href="{% url 'add_contact' %}">Add New Contact</a></p>
-
-<div class="flex flex-wrap">
-  {% for contact in contacts %}
-  <div class="w-33 pa3">
-    <h2>{{ contact.name }}</h2>
-    
+<div>
+<h1>{{ contact.name }}</h1>
+<h4>it's really nice out today</h4>    
     {% if contact.company_name %}
     <h3>{{ contact.company_name }}</h3>
     {% endif %}
@@ -47,10 +41,9 @@
     {% endif %}
 
     <p>
+      <a href="{% url 'list_contacts' %}">Go back to all contacts</a>  
       <a href="{% url 'edit_contact' pk=contact.pk %}">Edit Contact</a><br>    
       <a class="red" href="{% url 'delete_contact' pk=contact.pk %}">Delete Contact</a>
     </p>
   </div>
-  {% endfor %}
-</div>  
 {% endblock %}

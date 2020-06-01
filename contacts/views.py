@@ -24,6 +24,23 @@ def add_contact(request):
 
     return render(request, "contacts/add_contact.html", {"form": form})
 
+def add_address(request, contact_pk):
+    contact = get_object_or_404(Contact, pk=contact_pk)
+
+    if request.method == 'GET':
+        form = AddressForm()
+    else: 
+        form = AddressForm(data=request.POST)
+        if form.is_valid():
+            address = form.save(commit=False)
+            address.contact = contact 
+            address.save()
+            return redirect(to='list_contacts')
+
+    return render(request, "contacts/add_address.html", {
+        "form": form,
+        "contact": contact
+    })
 
 def edit_contact(request, pk):
     contact = get_object_or_404(Contact, pk=pk)

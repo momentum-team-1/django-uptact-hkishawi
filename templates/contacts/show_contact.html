@@ -8,16 +8,22 @@
     <h3>{{ contact.company_name }}</h3>
     {% endif %}
 
+
+    {% for address in contact.addresses.all %}
     <div class="flex">
-      <div class="pr2"><i class="icofont-location-pin"></i></div>
-      <div>
-        {{ contact.address_1 }}<br />
-        {% if contact.address_2 %}
-          {{ contact.address_2 }}<br />
+        <div class="pr2"><i class="icofont-location-pin"></i></div>
+        <div>
+        {% if address.address_type %}
+        <strong>{{ address.address_type }}</strong><br />
         {% endif %}
-        {{ contact.city }}, {{ contact.state }} {{ contact.zip_code }}
-      </div>
+        {{ address.line_1 }}<br />
+        {% if address.line_2 %}
+            {{ address.line_2 }}<br />
+        {% endif %}
+        {{ address.city }}, {{ address.state }} {{ address.zip_code }}
+        </div>
     </div>
+    {% endfor %}
 
     {% if contact.phone_number %}
     <div class="flex">

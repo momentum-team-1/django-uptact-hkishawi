@@ -21,5 +21,29 @@ class Contact(models.Model):
     zip_code = USZipCodeField(null=True, blank=True)
     company_name = models.CharField(max_length=255, null=True, blank=True)
     birthday = models.DateField(null=True, blank=True)
+    note = models.CharField(max_length=255, null=True, blank=True)
     
-class Notes(models.model):
+    def __str__(self):
+        return self.name
+
+
+class Address(models.Model):
+    contact = models.ForeignKey(to=Contact, on_delete=models.CASCADE, related_name="addresses")
+    address_type = models.CharField(max_length=255)
+    line_1 = models.CharField(max_length=255, null=True, blank=True)
+    line_2 = models.CharField(max_length=255, null=True, blank=True)
+    city = models.CharField(max_length=255, null=True, blank=True)
+    state = USStateField(null=True, blank=True)
+    zip_code = USZipCodeField(null=True, blank=True)
+
+    def __str__(self):
+        output = self.line_1
+        if self.line_2:
+            output += ", " + self.line_2
+        output += f", {self.city}, {self.state}, {self.zip_code} "
+        return output
+# class Note(models.Model):
+#     contact = models.ForiegnKey(to=Contact, on_delete=models.CASCADE, related_name="notes")
+#     note_type = models.CharField(max_length=255, null=True, blank=True)
+#     line_1 = models.CharField(max_length=255, null=True, blank=True)
+#     line_2 = models.CharField(max_length=255, null=True, blank=True)
